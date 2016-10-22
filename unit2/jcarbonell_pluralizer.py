@@ -1,43 +1,43 @@
 noun = input("Enter a noun to pluralize:")
 num = input("How many of the noun are there?")
 num_int = int(num)
-x = 0
-a = noun[-2:]
-if a == "fe":
-    x = 1
-elif a == "ay" or a == "oy" or a == "ey" or a == "uy":
-    x = 5
+type_ending = 0
+last_letters = noun[-2:]
+if last_letters == "fe":
+    type_ending = 1
+elif last_letters == "ay" or last_letters == "oy" or last_letters == "ey" or last_letters == "uy":
+    type_ending = 5
 elif noun[-1] == "y":
-    x = 2
-elif a == "ch" or a == "sh":
-    x = 3
-elif a == "us":
-    x = 4
+    type_ending = 2
+elif last_letters == "ch" or last_letters == "sh":
+    type_ending = 3
+elif last_letters == "us":
+    type_ending = 4
 else: 
-    x = 6
+    type_ending = 6
 
-b = ""    
-y = ""    
-if x == 1:
-    y = noun[:-2]
-    b = "ves"
-elif x == 2:
-    y = noun[:-1]
-    b = "ies"
-elif x == 3:
-    y = noun
-    b = "es"
-elif x == 4:
-    y = noun[:-2]
-    b = "i"
-elif x == 5:
-    y = noun
-    b = "s"
+ending_added = ""    
+part_kept = ""    
+if type_ending == 1:
+    part_kept = noun[:-2]
+    ending_added = "ves"
+elif type_ending == 2:
+    part_kept = noun[:-1]
+    ending_added = "ies"
+elif type_ending == 3:
+    part_kept = noun
+    ending_added = "es"
+elif type_ending == 4:
+    part_kept = noun[:-2]
+    ending_added = "i"
+elif type_ending == 5:
+    part_kept = noun
+    ending_added = "s"
 else:
-    y = y
-    b = "s"
+    part_kept = part_kept
+    ending_added = "s"
 
-final = y + b
+final = part_kept + ending_added
 print ("There are {} {}".format(num,final))
 
 

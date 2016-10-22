@@ -2,7 +2,6 @@ num_start = input("Enter the first number in the sequence: ")
 num_end = input("Enter the last number in the sequence: ")
 int_start = int(num_start)
 int_end = int(num_end)
-# For variable Z, 0 means it meets no condition, 1 means it will say Fizz, 2 means it will say Buzz, 3 means it will say FizzBuzz
 
 
 for x in range(int_start, int_end + 1):
