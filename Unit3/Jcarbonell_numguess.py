@@ -7,8 +7,8 @@ guess = -1
 while guess != answer:
     number_of_guess = number_of_guess + 1
     guess = int(input("Guess what the random number is:"))
-    if guess < answer:
+    if guess > answer:
         print("Too high. Try again.")
-    elif guess > answer:
+    elif guess < answer:
         print("Too low. Try again.")
 print ("You were correct! It took you {} guesses.".format(number_of_guess))
