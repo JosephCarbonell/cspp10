@@ -1,19 +1,19 @@
 import random 
 import getpass
-player_score = 0
-computer_score = 0
+player1_score = 0
+player2_score = 0
 num_of_ties = 0
 def main():
     rps_game()
     
 
 def get_p1_move():
-    player_choice = input("Enter Rock,Paper,or Scissors: ")
-    return player_choice
+    player1_choice = getpass.getpass("Player 1: Enter Rock, Paper, Scissors, Lizard, or Spock: ")
+    return player1_choice
 
-def get_comp_move():
-    computer_choice = random.randint(1,3)
-    return computer_choice
+def get_p2_move():
+    player2_choice = getpass.getpass("Player 2: Enter Rock, Paper, Scissors, Lizard, or Spock: ")
+    return player2_choice
 
     
 def get_rounds():
@@ -21,95 +21,104 @@ def get_rounds():
     return num_of_rounds
     
     
-def get_round_winner(player_choice,computer_choice):
-    global player_score
-    global computer_score
+def get_round_winner(player1_choice,player2_choice):
+    global player1_score
+    global player2_score
     global num_of_ties
-    if player_choice == "Rock":
-        if computer_choice == 1:
+    
+    if player1_choice == "Rock":
+        if player2_choice == "Rock":
             num_of_ties = num_of_ties + 1
             return ("It was a tie")
-        elif computer_choice == 2:
-            computer_score = computer_score + 1
-            return ("The winner is computer")
-        else:
-            player_score = player_score + 1
-            return ("The winner is player")
-    elif player_choice == "Paper":
-        if computer_choice == 1:
-            player_score = player_score + 1
-            return("The winner is player")
-        elif computer_choice == 2:
+        elif player2_choice == "Paper" or player2_choice == "Spock":
+            player2_score = player2_score + 1
+            return ("The winner is Player 2")
+        elif player2_choice == "Scissors" or player2_choice == "Lizard":
+            player1_score = player1_score + 1
+            return ("The winner is Player 1")
+    
+    elif player1_choice == "Paper":
+        if player2_choice == "Rock" or player2_choice == "Spock":
+            player1_score = player1_score + 1
+            return("The winner is Player 1")
+        elif player2_choice == "Paper":
             num_of_ties = num_of_ties + 1
             return("It was a tie")
+        elif player2_choice == "Scissors" or player2_choice == "Lizard":
+            player2_score = player2_score + 1
+            return("The winner is Player 2")
+    
+    elif player1_choice == "Scissors":
+        if player2_choice == "Rock" or player2_choice == "Spock":
+            player2_score = player2_score + 1
+            return("The winner is Player 2")
+        elif player2_choice == "Paper" or player2_choice == "Lizard":
+            player1_score = player1_score + 1
+            return("The winner is Player 1")
         else:
-            computer_score = computer_score + 1
-            return("The winner is computer")
+            return("It was a tie")
+            num_of_ties = num_of_ties + 1
+    
+    elif player1_choice == "Lizard":
+        if player2_choice == "Rock" or player2_choice == "Scissors":
+            player2_score = player2_score + 1
+            return("The winner is Player 2")
+        elif player2_choice == "Paper" or player2_choice == "Spock":
+            player1_score = player1_score + 1
+            return("The winner is Player 1")
+        else:
+            num_of_ties = num_of_ties + 1
+            return("It was a tie")
+    
+    elif player1_choice == "Spock":
+        if player2_choice == "Paper" or player2_choice == "Lizard":
+            player2_score = player2_score + 1
+            return("The winner is Player 2")
+        elif player2_choice == "Rock" or player2_choice == "Scissors":
+            player1_score = player1_score + 1
+            return("The winner is Player 1")
+        else:
+            num_of_ties = num_of_ties + 1
+            return("It was a tie")
+    
     else:
-        if computer_choice == 1:
-            computer_score = computer_score + 1
-            return("The winner is computer")
-        elif computer_choice == 2:
-            player_score = player_score + 1
-            return("The winner is player")
-        else:
-            num_of_ties = num_of_ties + 1
-            return("It was a tie")
+        return("Try again, that option was invalid")
             
-def get_full_move(com_choice):
-    if com_choice == 1:
-        return ("Rock")
-    elif com_choice == 2:
-        return("Paper")
-    else:
-        return("Scissors")
-
-def keep_score(winner):
-    global player_score
-    global computer_score
-    global num_of_ties
-    if winner == "player":
-        player_score = player_score + 1
-    elif winner == "computer":
-        computer_score = computer_score + 1
-    else:
-        num_of_ties = num_of_ties + 1
-        
         
 
 def print_score():
-    global player_score
-    global computer_score
+    global player1_score
+    global player2_score
     global num_of_ties
-    return("The score is Computer:{} Player:{} and Ties:{}.".format(computer_score,player_score,num_of_ties))
+    return("The score is Player 1: {} Player 2: {} and Ties: {}.".format(player1_score,player2_score,num_of_ties))
 
 def rps_game():
     print("Welcome to Rock,Paper,Scissors!")
-    global player_score
-    global computer_score
+    global player1_score
+    global player2_score
     global num_of_ties
     num_of_rounds = get_rounds()
     for x in range(num_of_rounds):
-        if player_score > num_of_rounds / 2:
-            print ("Player wins")
+        if player1_score > num_of_rounds / 2:
+            print ("Player 1 wins")
             break
-        elif computer_score > num_of_rounds / 2:
-            print("Computer wins")
+        elif player2_score > num_of_rounds / 2:
+            print("Player 2 wins")
             break
         p1_move = get_p1_move()
-        comp_move = get_comp_move()
+        p2_move = get_p2_move()
         print ("It is round {}".format(x + 1))
-        print ("Player entered {}.".format(p1_move))
-        print ("Computer entered {}.".format(get_full_move(comp_move)))
-        round_winner = (get_round_winner(p1_move,comp_move))
+        print ("Player 1 entered {}.".format(p1_move))
+        print ("Player 2 entered {}.".format(p2_move))
+        round_winner = (get_round_winner(p1_move,p2_move))
         print ("{}".format(round_winner))
         print (print_score())
-    if player_score > computer_score:
-        print ("The player won! The final score was Computer:{} Player:{} Ties:{}".format(computer_score,player_score,num_of_ties))
-    elif computer_score > player_score:
-        print ("The computer won! The final score was Computer:{} Player:{} Ties:{}".format(computer_score,player_score,num_of_ties))
-    elif computer_score == player_score:
-        print ("It was a tie! Both player and computer had {} wins".format(player_score))
+    if player1_score > player2_score:
+        print ("The player won! The final score was Player 1: {} Player 2: {} Ties: {}".format(player1_score,player2_score,num_of_ties))
+    elif player2_score > player1_score:
+        print ("The computer won! The final score was Player 1: {} Player 2: {} Ties: {}".format(player1_score,player2_score,num_of_ties))
+    elif player2_score == player1_score:
+        print ("It was a tie! Both Player 1 and Player 2 had {} wins".format(player1_score))
         
         
 
