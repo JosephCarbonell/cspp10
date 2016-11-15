@@ -8,15 +8,111 @@ def main():
 
 def get_bet(player):
     bet = 0
-    while bet < 1:  
-        bet == int(input("How much would you like bet?"))
-    return bet
+    while True == True:
+        bet = float(input("How much would you like to bet? "))
+        if player == 1 and bet > player1_bank:
+            print("You can not bet more than you have in your bank.")
+        elif player == 2 and bet > player2_bank:
+            print("You can not bet more than you have in your bank.")
+        elif bet < 0 or bet != int(bet):
+            print("That bet type is invalid, make sure you use a positive integer as your bet.")
+        else:
+            print("That is a valid bet.")
+            return bet
 
-def play_round(player):
+def roll_2_dice():
+    num_1 = random.randint(1,6)
+    num_2 = random.randint(1,6)
+    print ("The dice are thrown {} and {}, {} total.".format(num_1,num_2,num_1+num_2))
+    return num_1 + num_2
+
+def player_swap(player):
+    if player == 1:
+        return 2
+    elif player == 2:
+        return 1
+        
+def check_first_roll(first_roll):
+    if first_roll == 2 or first_roll == 3 or first_roll == 12:
+        print ("You lost the roll.")
+        return ("loss")
+    elif first_roll == 7 or first_roll == 11:
+        print ("You won the roll.")
+        return ("win")
+    else:
+        print ("Your point number is {}.".format(first_roll))
+        return (first_roll)
+
+def check_point_number(point_number):
+    while True == True:
+        roll = roll_2_dice()
+        if roll == point_number:
+            print("You won the roll.")
+            return ("win")
+        elif roll == 7:
+            print("You lost the roll")
+            return ("loss")
+        else:
+            print("You didn't win or lose. Reroll!")
+        
     
+def play_round(player):
+    print("Player {} is the shooter!".format(player))
+    first_roll = roll_2_dice()
+    result = check_first_roll(first_roll)
+    if result == ("loss"):
+        return ("loss")
+    elif result == ("win"):
+        return ("win")
+    else:
+        point_number = result
+        result = check_point_number(point_number)
+        return result
+        
+def change_value(player,result):
+    global bet
+    global player1_bank
+    global player2_bank
+    if player == 1:
+        if result == "win":
+            player1_bank = player1_bank + bet
+        if result == "loss":
+            player1_bank = player1_bank - bet
+    elif player == 2:
+        if result == "win":
+            player2_bank = player2_bank + bet
+        if result == "loss":
+            player2_bank = player2_bank - bet
+        
+            
+        
     
 
 def craps_game():
+    global player1_bank
+    global player2_bank
+    global bet
+    print("Player 1 has {} dollars and Player 2 has {} dollars.".format(player1_bank,player2_bank))
+    player = 1
+    while player1_bank > 0 and player2_bank > 0:
+        print("It is Player {}'s turn.".format(player))
+        bet = get_bet(player)
+        result = play_round(player)
+        change_value(player,result)
+        print ("Player 1 has {} dollars and Player 2 has {} dollars.".format(player1_bank,player2_bank))
+        player = player_swap(player)
+    if player1_bank == 0:
+        print ("Player 2 won!")
+    elif player2_bank == 0:
+        print ("Player 1 won!")
+        
+            
+        
+main()    
+        
+        
+        
+    
     
     
     

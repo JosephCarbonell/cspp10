@@ -56,8 +56,9 @@ def get_round_winner(player1_choice,player2_choice):
             player1_score = player1_score + 1
             return("The winner is Player 1")
         else:
-            return("It was a tie")
             num_of_ties = num_of_ties + 1
+            return("It was a tie")
+            
     
     elif player1_choice == "Lizard":
         if player2_choice == "Rock" or player2_choice == "Scissors":
