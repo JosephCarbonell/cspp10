@@ -54,6 +54,11 @@ def check_point_number(point_number):
             return ("loss")
         else:
             print("You didn't win or lose. Reroll!")
+            x = input("Press enter to roll again: ")
+            if x == "":
+                y = 2
+            else:
+                break
         
     
 def play_round(player):
@@ -69,20 +74,18 @@ def play_round(player):
         result = check_point_number(point_number)
         return result
         
-def change_value(player,result):
+def change_value(result):
     global bet
+    global bet2
     global player1_bank
     global player2_bank
-    if player == 1:
-        if result == "win":
-            player1_bank = player1_bank + bet
-        if result == "loss":
-            player1_bank = player1_bank - bet
-    elif player == 2:
-        if result == "win":
-            player2_bank = player2_bank + bet
-        if result == "loss":
-            player2_bank = player2_bank - bet
+    if result == "win":
+        player1_bank = player1_bank + bet1 
+        player2_bank = player2_bank + bet2
+    if result == "loss":
+        player1_bank = player1_bank - bet1
+        player2_bank = player2_bank - bet2
+
         
             
         
@@ -91,17 +94,25 @@ def change_value(player,result):
 def craps_game():
     global player1_bank
     global player2_bank
-    global bet
+    global bet1
+    global bet2
     print("Player 1 has {} dollars and Player 2 has {} dollars.".format(player1_bank,player2_bank))
     player = 1
     while player1_bank > 0 and player2_bank > 0:
-        print("It is Player {}'s turn.".format(player))
-        bet = get_bet(player)
-        result = play_round(player)
-        change_value(player,result)
-        print ("Player 1 has {} dollars and Player 2 has {} dollars.".format(player1_bank,player2_bank))
+        print("Player {} is the shooter.".format(player))
+        print("It is Player 1's turn to bet")
+        bet1 = get_bet(player)
         player = player_swap(player)
-    if player1_bank == 0:
+        print("It is Player 2's turn to bet")
+        bet2 = get_bet(player)
+        player = player_swap(player)
+        result = play_round(player)
+        change_value(result)
+        print ("Player 1 has {} dollars and Player 2 has {} dollars.".format(player1_bank,player2_bank))
+
+    if player1_bank == 0 and player2_bank == 0:
+        print("Both players went broke!")
+    elif player1_bank == 0:
         print ("Player 2 won!")
     elif player2_bank == 0:
         print ("Player 1 won!")
