@@ -1,7 +1,5 @@
-num_start = input("Enter the first number in the sequence: ")
-num_end = input("Enter the last number in the sequence: ")
-int_start = int(num_start)
-int_end = int(num_end)
+int_start = (int(input("Enter the first number in the sequence: ")))
+int_end = (int(input("Enter the last number in the sequence: ")))
 
 
 for x in range(int_start, int_end + 1):

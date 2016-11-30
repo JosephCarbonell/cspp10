@@ -69,7 +69,7 @@ def get_round_winner(player1_choice,player2_choice):
             num_of_ties = num_of_ties + 1
             return("It was a tie")
     
-    elif player1_choice == "Spock":
+    elif player1_choice == "Spock":         
         if player2_choice == "Paper" or player2_choice == "Lizard":
             player2_score = player2_score + 1
             return("The winner is Player 2")
@@ -84,10 +84,9 @@ def get_round_winner(player1_choice,player2_choice):
         return("Try again, that option was invalid")
             
         
-
+    
 def print_score():
     global player1_score
     global player2_score
     global num_of_ties
     return("The score is Player 1: {} Player 2: {} and Ties: {}.".format(player1_score,player2_score,num_of_ties))
-
