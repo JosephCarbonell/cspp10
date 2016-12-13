@@ -115,7 +115,7 @@ def craps_game():
     elif player1_bank == 0:
         print ("Player 2 won!")
     elif player2_bank == 0:
-        print ("Player 1 won!")
+        print ("Player 1 won!") 
         
             
         
