@@ -86,11 +86,6 @@ def change_value(result):
         player1_bank = player1_bank - bet1
         player2_bank = player2_bank - bet2
 
-        
-            
-        
-    
-
 def craps_game():
     global player1_bank
     global player2_bank
@@ -116,8 +111,6 @@ def craps_game():
         print ("Player 2 won!")
     elif player2_bank == 0:
         print ("Player 1 won!") 
-        
-            
         
 main()    
         
