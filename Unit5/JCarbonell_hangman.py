@@ -61,22 +61,26 @@ def hangman_game():
     chances_left = 8
     win_or_lose = 0
     while chances_left > 0:
+        print ("You have {} chances left!".format(chances_left))
         print ("Fill in the blanks: " + word_as_blanks)
-        print (word)
         chosen_letter = pick_a_letter()
         indexes_of_letter = check_for_letter(word_as_list,chosen_letter)
-        print (indexes_of_letter)
         edited_blanks = edit_word_with_blanks(word_as_blanks,chosen_letter,indexes_of_letter)
         word_as_blanks = edited_blanks
-        if word_as_blanks == edited_blanks:
+        edited_blanks_as_list = list(edited_blanks)
+        for item in edited_blanks_as_list:
+            if item == " ":
+                edited_blanks_as_list.remove(item)
+        if chosen_letter not in word:
             chances_left = chances_left - 1
-        if word_as_list == list(edited_blanks):
+        if word_as_list == edited_blanks_as_list:
             win_or_lose = "win"
             break
         print (edited_blanks)
     if win_or_lose == "win":
         print ("You won!")
     else:
+        print ("Your word was {}".format(word))
         print ("You lose... Try again!")
         
 main()
