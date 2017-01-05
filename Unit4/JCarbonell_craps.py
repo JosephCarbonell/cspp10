@@ -6,6 +6,10 @@ player2_bank = 100
 def main():
     craps_game()
 
+
+# Purpose: Get the players bet for the current round.
+# Arguments: (Player whos turn it is)
+# 
 def get_bet(player):
     bet = 0
     while True == True:
@@ -44,7 +48,7 @@ def check_first_roll(first_roll):
         return (first_roll)
 
 def check_point_number(point_number):
-    while True == True:
+    while True:
         roll = roll_2_dice()
         if roll == point_number:
             print("You won the roll.")
